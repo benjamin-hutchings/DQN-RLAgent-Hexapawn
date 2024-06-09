@@ -1,0 +1,5 @@
+Flask
+numpy
+gunicorn
+flask-cors
+tensorflow

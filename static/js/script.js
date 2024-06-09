@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const boardElement = document.getElementById('board');
     let board = [];
 
-    const apiUrl = "https://play-hexapawn-e5aa909e0052.herokuapp.com/"; // Replace with your Heroku app URL
+    const apiUrl = ""; // Leave empty to use the same origin as the frontend
 
     function renderBoard() {
         boardElement.innerHTML = '';
