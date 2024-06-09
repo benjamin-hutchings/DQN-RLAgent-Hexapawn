@@ -1,90 +1,72 @@
-const symbols = {"1": 'X', "-1": 'O', "0": '.'};  // Object keys must be strings
-let board = [];
-let selectedPiece = null;
-let validMoves = [];
+document.addEventListener("DOMContentLoaded", function() {
+    const boardElement = document.getElementById('board');
+    let board = [];
 
-function renderBoard() {
-    const table = document.getElementById('board');
-    table.innerHTML = '';
-    for (let r = 0; r < 3; r++) {
-        const row = document.createElement('tr');
-        for (let c = 0; c < 3; c++) {
-            const cell = document.createElement('td');
-            cell.textContent = symbols[board[r][c].toString()];
-            cell.className = '';
-            if (selectedPiece && validMoves.includes(`${r},${c}`)) {
-                cell.className = 'highlight';
-                cell.onclick = () => makeMove(selectedPiece, [r, c]);
-            } else if (board[r][c] === 1) {
-                cell.onclick = () => selectPiece([r, c]);
+    const apiUrl = "https://play-hexapawn-e5aa909e0052.herokuapp.com/"; // Replace with your Heroku app URL
+
+    function renderBoard() {
+        boardElement.innerHTML = '';
+        for (let row = 0; row < 3; row++) {
+            const tr = document.createElement('tr');
+            for (let col = 0; col < 3; col++) {
+                const td = document.createElement('td');
+                td.dataset.row = row;
+                td.dataset.col = col;
+                td.textContent = convertToSymbol(board[row][col]);
+                td.addEventListener('click', handleCellClick);
+                tr.appendChild(td);
             }
-            row.appendChild(cell);
+            boardElement.appendChild(tr);
         }
-        table.appendChild(row);
     }
-}
 
-async function resetGame() {
-    try {
-        const response = await fetch('/reset', {method: 'POST'});
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const data = await response.json();
-        console.log('Game reset:', data);
-        board = data.board;
-        selectedPiece = null;
-        validMoves = [];
-        renderBoard();
-    } catch (error) {
-        console.error('Error resetting game:', error);
+    function convertToSymbol(value) {
+        if (value === 1) return 'X';
+        if (value === -1) return 'O';
+        return '';
     }
-}
 
-function selectPiece(piece) {
-    selectedPiece = piece;
-    validMoves = [];
-    const r = piece[0];
-    const c = piece[1];
-    if (r < 2 && board[r + 1][c] === 0) {
-        validMoves.push(`${r + 1},${c}`);
+    function handleCellClick(event) {
+        const row = event.target.dataset.row;
+        const col = event.target.dataset.col;
+        makeMove(parseInt(row), parseInt(col));
     }
-    if (r < 2 && c > 0 && board[r + 1][c - 1] === -1) {
-        validMoves.push(`${r + 1},${c - 1}`);
-    }
-    if (r < 2 && c < 2 && board[r + 1][c + 1] === -1) {
-        validMoves.push(`${r + 1},${c + 1}`);
-    }
-    renderBoard();
-}
 
-async function makeMove(from, to) {
-    try {
-        const move = [from, to];
-        const response = await fetch('/move', {
+    function resetGame() {
+        fetch(`${apiUrl}/reset`, {
             method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({move: move})
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            board = data.board;
+            renderBoard();
         });
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const data = await response.json();
-        if (data.error) {
-            alert(data.error);
-            return;
-        }
-        console.log('Move made:', data);
-        board = data.board;
-        selectedPiece = null;
-        validMoves = [];
-        renderBoard();
-        if (data.result) {
-            alert(`Game over: ${data.result}`);
-        }
-    } catch (error) {
-        console.error('Error making move:', error);
     }
-}
 
-window.onload = resetGame;
+    function makeMove(row, col) {
+        fetch(`${apiUrl}/move`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ move: [[row, col]] })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                alert(data.error);
+            } else {
+                board = data.board;
+                renderBoard();
+                if (data.result) {
+                    alert(`Game over! Result: ${data.result}`);
+                }
+            }
+        });
+    }
+
+    resetGame();
+});
