@@ -5,11 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hexapawn</title>
     <link rel="stylesheet" href="/static/css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1 style="text-align:center;">Hexapawn</h1>
-    <table id="board"></table>
-    <button onclick="resetGame()">Reset Game</button>
+    <div class="container">
+        <h1>Hexapawn</h1>
+        <div class="instructions">
+            <h2>How to Play</h2>
+            <p>Hexapawn is a simplified version of chess played on a 3x3 grid. The game starts with pawns in the first row for both players.</p>
+            <ul>
+                <li>Players take turns moving their pawns.</li>
+                <li>Pawns can move forward one square or capture diagonally.</li>
+                <li>The game ends when a player reaches the opposite side, captures all opponent's pawns, or no valid moves are left.</li>
+            </ul>
+        </div>
+        <table id="board"></table>
+        <button onclick="resetGame()">Reset Game</button>
+    </div>
     <script src="/static/js/script.js"></script>
 </body>
 </html>

@@ -1,9 +1,11 @@
 import numpy as np
 from flask import Flask, jsonify, request, render_template
+from flask_cors import CORS
 from agent import DQNAgent
 from game import Hexapawn
 
 app = Flask(__name__)
+CORS(app)
 
 # Initialize the game and agent
 env = Hexapawn()
@@ -30,24 +32,24 @@ def move():
     try:
         human_move = tuple(map(tuple, data['move']))  # Ensure the move data is a tuple of tuples
         valid_moves = env.valid_moves()
-        
+
         if human_move not in valid_moves:
             return jsonify({'error': 'Invalid move'}), 400
-        
+
         next_state, reward, done = env.step(human_move)
-        
+
         if done:
             result = 'draw' if reward == 0 else 'win' if reward == 1 else 'lose'
             return jsonify({'board': env.board.tolist(), 'result': result})
-        
+
         state = np.reshape(next_state, [1, state_size])
         valid_moves = env.valid_moves()
         agent_action_index = agent.act(state, valid_moves)
         agent_action = valid_moves[agent_action_index]
         next_state, reward, done = env.step(agent_action)
-        
+
         result = 'draw' if done and reward == 0 else 'lose' if reward == -1 else None
-        
+
         return jsonify({'board': env.board.tolist(), 'result': result})
     except Exception as e:
         print(f"Error processing move: {e}")
