@@ -2,4 +2,4 @@ Flask
 numpy
 gunicorn
 flask-cors
-tensorflow
+tensorflow-cpu
