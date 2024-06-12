@@ -3,18 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hexapawn with DQN</title>
+    <title>Hexapawn Game</title>
     <link rel="stylesheet" href="/static/styles.css">
 </head>
 <body>
     <div class="container">
-        <h1>Hexapawn Game with Deep Q-Network (DQN)</h1>
-        <div class="game-section">
+        <h1>Hexapawn Game</h1>
+        <div id="game">
             <h2>How to Play</h2>
             <p>The goal of Hexapawn is to either reach the opposite side of the board with one of your pawns or to block your opponent such that they have no valid moves left.</p>
             <div id="board"></div>
             <p id="message"></p>
+            <table id="board"></table>
         </div>
+        <button id="reset-button">Reset Game</button>
         <div class="info-section">
             <h2>Technical Details</h2>
             <p>This project demonstrates a simple game of Hexapawn where you play against a Deep Q-Network (DQN) agent. Below are some details about the project:</p>
@@ -53,6 +55,7 @@
                 <li>Enhancing the frontend for a better user experience.</li>
             </ul>
         </div>
+    </div>
     </div>
     <script src="/static/script.js"></script>
 </body>
