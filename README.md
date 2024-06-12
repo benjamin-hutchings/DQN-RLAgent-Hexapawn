@@ -30,6 +30,8 @@ Hexapawn is a simple two-player game played on a 3x3 grid. The objective is to e
 
 In this implementation, you play as 'X' against the DQN agent playing as 'O'. To make a move, select one of your pawns and then choose a valid position to move to.
 
+![Gameplay](imgs/gameplay.PNG)
+
 ## Technical Details
 
 ### Deep Q-Network (DQN)
@@ -61,12 +63,16 @@ The design process involved the following steps:
 5. Containerize the application using Docker.
 6. Deploy the application to Heroku.
 
+![Web App](imgs/web-app.PNG)
+
 ### Future Work
 
 This project was a proof of concept to understand the process of building and deploying a game with a deep learning agent. The next steps involve:
 - Exploring more complex games and environments.
 - Improving the training process for the DQN agent.
 - Enhancing the frontend for a better user experience.
+
+![Game Over](imgs/gameover.PNG)
 
 ## Installation
 
