@@ -30,7 +30,7 @@ Hexapawn is a simple two-player game played on a 3x3 grid. The objective is to e
 
 In this implementation, you play as 'X' against the DQN agent playing as 'O'. To make a move, select one of your pawns and then choose a valid position to move to.
 
-![Gameplay](imgs/gameplay.PNG)
+![Web App](imgs/web-app.PNG)
 
 ## Technical Details
 
@@ -63,7 +63,7 @@ The design process involved the following steps:
 5. Containerize the application using Docker.
 6. Deploy the application to Heroku.
 
-![Web App](imgs/web-app.PNG)
+![Gameplay](imgs/gameplay.PNG)
 
 ### Future Work
 
