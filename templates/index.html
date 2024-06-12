@@ -12,9 +12,10 @@
         <div id="game">
             <h2>How to Play</h2>
             <p>The goal of Hexapawn is to either reach the opposite side of the board with one of your pawns or to block your opponent such that they have no valid moves left.</p>
-            <div id="board"></div>
+            <div id="board-container">
+                <table id="board"></table>
+            </div>
             <p id="message"></p>
-            <table id="board"></table>
         </div>
         <button id="reset-button">Reset Game</button>
         <div class="info-section">
@@ -55,7 +56,6 @@
                 <li>Enhancing the frontend for a better user experience.</li>
             </ul>
         </div>
-    </div>
     </div>
     <script src="/static/script.js"></script>
 </body>

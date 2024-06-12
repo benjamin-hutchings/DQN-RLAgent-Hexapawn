@@ -37,24 +37,28 @@ ul, ol {
     color: #333;
 }
 
-#board {
-    display: grid;
-    grid-template-columns: repeat(3, 100px);
-    gap: 5px;
-    justify-content: center;
-    margin: 20px 0;
-}
-
-#board div {
-    width: 100px;
-    height: 100px;
+#board-container {
     display: flex;
     justify-content: center;
-    align-items: center;
+    margin-top: 20px;
+}
+
+#board {
+    border-collapse: collapse;
+}
+
+#board td {
+    width: 60px;
+    height: 60px;
+    text-align: center;
+    vertical-align: middle;
+    border: 1px solid #555;
     font-size: 24px;
-    border: 2px solid #555;
-    background-color: #fafafa;
     cursor: pointer;
+}
+
+.valid-move {
+    background-color: #d4edda;
 }
 
 #message {
@@ -63,6 +67,14 @@ ul, ol {
     color: #d9534f;
 }
 
-.game-section, .info-section {
-    margin-bottom: 20px;
+button {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
 }

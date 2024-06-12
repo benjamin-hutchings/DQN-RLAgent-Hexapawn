@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", function() {
     const boardElement = document.getElementById('board');
     const resetButton = document.getElementById('reset-button');
+    const messageElement = document.getElementById('message');
     let board = [];
     let selectedCell = null;
     let currentPhase = 'selectCross'; // Initial phase
@@ -90,6 +91,7 @@ document.addEventListener("DOMContentLoaded", function() {
             board = data.board;
             renderBoard();
             currentPhase = 'selectCross';
+            messageElement.textContent = ''; // Clear the message
         });
     }
 
@@ -104,12 +106,12 @@ document.addEventListener("DOMContentLoaded", function() {
         .then(response => response.json())
         .then(data => {
             if (data.error) {
-                alert(data.error);
+                messageElement.textContent = data.error;
             } else {
                 board = data.board;
                 renderBoard();
                 if (data.result) {
-                    alert(`Game over! Result: ${data.result}. Please reset the board.`);
+                    messageElement.textContent = `Game over! Result: ${data.result}. Please reset the board.`;
                 }
             }
         });
