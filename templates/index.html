@@ -3,16 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hexapawn Game</title>
+    <title>Hexapawn with DQN</title>
     <link rel="stylesheet" href="/static/styles.css">
 </head>
 <body>
     <div class="container">
-        <h1>Hexapawn Game</h1>
-        <div id="game">
-            <table id="board"></table>
+        <h1>Hexapawn Game with Deep Q-Network (DQN)</h1>
+        <div class="game-section">
+            <h2>How to Play</h2>
+            <p>The goal of Hexapawn is to either reach the opposite side of the board with one of your pawns or to block your opponent such that they have no valid moves left.</p>
+            <div id="board"></div>
+            <p id="message"></p>
         </div>
-        <button id="reset-button">Reset Game</button>
+        <div class="info-section">
+            <h2>Technical Details</h2>
+            <p>This project demonstrates a simple game of Hexapawn where you play against a Deep Q-Network (DQN) agent. Below are some details about the project:</p>
+            <h3>Deep Q-Network (DQN)</h3>
+            <p>The DQN agent was trained using the following steps:</p>
+            <ul>
+                <li>State representation: The board is represented as a 1D array of size 9 (3x3 grid).</li>
+                <li>Action space: There are 9 possible moves (each cell in the grid).</li>
+                <li>Neural network: The agent uses a neural network with three fully connected layers to predict the Q-values for each action.</li>
+                <li>Training: The agent was trained using 100 episodes, with experience replay and target network updates to stabilize learning.</li>
+            </ul>
+            <h3>Technologies Used</h3>
+            <p>This app was built using the following technologies:</p>
+            <ul>
+                <li>Python: For the backend logic and DQN training.</li>
+                <li>Flask: For serving the web application.</li>
+                <li>JavaScript: For handling the frontend interactions.</li>
+                <li>Docker: For containerizing the application and making it easily deployable.</li>
+                <li>Heroku: For hosting the application online.</li>
+            </ul>
+            <h3>Design Steps</h3>
+            <p>The design process involved the following steps:</p>
+            <ol>
+                <li>Define the game logic for Hexapawn.</li>
+                <li>Develop the DQN agent and train it using self-play.</li>
+                <li>Build the Flask backend to serve the game and handle moves.</li>
+                <li>Create a simple HTML/CSS/JavaScript frontend for user interaction.</li>
+                <li>Containerize the application using Docker.</li>
+                <li>Deploy the application to Heroku.</li>
+            </ol>
+            <h3>Future Work</h3>
+            <p>This project was a proof of concept to understand the process of building and deploying a game with a deep learning agent. The next steps involve:</p>
+            <ul>
+                <li>Exploring more complex games and environments.</li>
+                <li>Improving the training process for the DQN agent.</li>
+                <li>Enhancing the frontend for a better user experience.</li>
+            </ul>
+        </div>
     </div>
     <script src="/static/script.js"></script>
 </body>
